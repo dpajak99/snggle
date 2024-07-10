@@ -1,3 +1,4 @@
+import 'package:isar/isar.dart';
 import 'package:snggle/config/locator.dart';
 import 'package:snggle/infra/entities/vault_entity.dart';
 import 'package:snggle/infra/services/groups_service.dart';
@@ -23,7 +24,7 @@ class VaultModelFactory {
       index: lastVaultIndex + 1,
       pinnedBool: false,
       encryptedBool: false,
-      uuid: uuid,
+      id: Isar.autoIncrement,
       filesystemPath: FilesystemPath(<String>[...parentFilesystemPath.pathSegments, uuid]),
       name: name,
       listItemsPreview: <VaultModel>[],
@@ -37,8 +38,8 @@ class VaultModelFactory {
     List<WalletModel> walletsPreview = <WalletModel>[];
 
     if (previewEmptyBool == false) {
-      groupsPreview = await _groupsService.getAllByParentPath(vaultEntity.filesystemPath, firstLevelBool: true, previewEmptyBool: true);
-      walletsPreview = await _walletsService.getAllByParentPath(vaultEntity.filesystemPath, firstLevelBool: true);
+      groupsPreview = await _groupsService.getAllByParentPath(FilesystemPath.fromString(vaultEntity.filesystemPathString), firstLevelBool: true, previewEmptyBool: true);
+      walletsPreview = await _walletsService.getAllByParentPath(FilesystemPath.fromString(vaultEntity.filesystemPathString), firstLevelBool: true);
     }
 
     List<AListItemModel> listItemsPreview = <AListItemModel>[
@@ -48,10 +49,10 @@ class VaultModelFactory {
 
     return VaultModel(
       index: vaultEntity.index,
-      uuid: vaultEntity.uuid,
-      pinnedBool: vaultEntity.pinnedBool,
-      encryptedBool: vaultEntity.encryptedBool,
-      filesystemPath: vaultEntity.filesystemPath,
+      id: vaultEntity.id,
+      pinnedBool: vaultEntity.pinned,
+      encryptedBool: vaultEntity.encrypted,
+      filesystemPath: FilesystemPath.fromString(vaultEntity.filesystemPathString),
       name: vaultEntity.name,
       listItemsPreview: listItemsPreview,
     );

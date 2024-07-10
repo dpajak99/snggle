@@ -101,6 +101,9 @@ dependencies:
   # https://pub.dev/packages/custom_pop_up_menu
   custom_pop_up_menu: 1.2.4
 
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -118,6 +121,8 @@ dev_dependencies:
   # A build system for Dart code generation and modular compilation
   # https://pub.dev/packages/build_runner
   build_runner: 2.4.7
+
+  isar_generator: ^3.1.0+1
 
 flutter:
   uses-material-design: true

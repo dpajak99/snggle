@@ -92,12 +92,12 @@ void main() {
     test('Should [return VaultModel] with values from given VaultEntity', () async {
       // Arrange
       VaultEntity actualVaultEntity = VaultEntity(
-        pinnedBool: false,
-        encryptedBool: false,
+        pinned: false,
+        encrypted: false,
         index: 10,
         uuid: '7d871464-f352-432d-ad70-b001b38a17c9',
         name: 'TEST VAULT',
-        filesystemPath: FilesystemPath.fromString('7d871464-f352-432d-ad70-b001b38a17c9'),
+        filesystemPathString: FilesystemPath.fromString('7d871464-f352-432d-ad70-b001b38a17c9'),
       );
 
       // Act

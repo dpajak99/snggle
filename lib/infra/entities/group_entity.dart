@@ -6,14 +6,14 @@ import 'package:snggle/shared/utils/filesystem_path.dart';
 class GroupEntity extends Equatable {
   final bool pinnedBool;
   final bool encryptedBool;
-  final String uuid;
+  final int id;
   final String name;
   final FilesystemPath filesystemPath;
 
   const GroupEntity({
     required this.pinnedBool,
     required this.encryptedBool,
-    required this.uuid,
+    required this.id,
     required this.name,
     required this.filesystemPath,
   });
@@ -22,7 +22,7 @@ class GroupEntity extends Equatable {
     return GroupEntity(
       pinnedBool: json['pinned'] as bool,
       encryptedBool: json['encrypted'] as bool,
-      uuid: json['uuid'] as String,
+      id: json['id'] as int,
       name: json['name'] as String,
       filesystemPath: FilesystemPath.fromString(json['filesystem_path'] as String),
     );
@@ -32,7 +32,7 @@ class GroupEntity extends Equatable {
     return GroupEntity(
       pinnedBool: groupModel.pinnedBool,
       encryptedBool: groupModel.encryptedBool,
-      uuid: groupModel.uuid,
+      id: groupModel.id,
       name: groupModel.name,
       filesystemPath: groupModel.filesystemPath,
     );
@@ -43,12 +43,12 @@ class GroupEntity extends Equatable {
       'type': GroupType.group.name,
       'pinned': pinnedBool,
       'encrypted': encryptedBool,
-      'uuid': uuid,
+      'id': id,
       'name': name,
       'filesystem_path': filesystemPath.fullPath,
     };
   }
 
   @override
-  List<Object?> get props => <Object?>[pinnedBool, encryptedBool, uuid, name, filesystemPath];
+  List<Object?> get props => <Object?>[pinnedBool, encryptedBool, id, name, filesystemPath];
 }

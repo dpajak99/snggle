@@ -6,14 +6,14 @@ import 'package:snggle/shared/utils/filesystem_path.dart';
 abstract class AListItemModel with EquatableMixin {
   final bool encryptedBool;
   final bool pinnedBool;
-  final String uuid;
+  final int id;
   final FilesystemPath filesystemPath;
   final String? _name;
 
   AListItemModel({
     required this.encryptedBool,
     required this.pinnedBool,
-    required this.uuid,
+    required this.id,
     required this.filesystemPath,
     String? name,
   }) : _name = name;
@@ -46,5 +46,5 @@ abstract class AListItemModel with EquatableMixin {
   }
 
   @override
-  List<Object?> get props => <Object?>[encryptedBool, pinnedBool, uuid, filesystemPath];
+  List<Object?> get props => <Object?>[encryptedBool, pinnedBool, id, filesystemPath];
 }

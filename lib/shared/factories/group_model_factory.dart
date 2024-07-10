@@ -1,3 +1,4 @@
+import 'package:isar/isar.dart';
 import 'package:snggle/config/locator.dart';
 import 'package:snggle/infra/entities/group_entity.dart';
 import 'package:snggle/infra/entities/network_group_entity.dart';
@@ -19,14 +20,13 @@ class GroupModelFactory {
   final GroupsService _groupsService = globalLocator<GroupsService>();
 
   GroupModel createNewGroup({required FilesystemPath parentFilesystemPath, required String name}) {
-    String uuid = const Uuid().v4();
 
     return GroupModel(
       pinnedBool: false,
       encryptedBool: false,
-      uuid: uuid,
+      id: Isar.autoIncrement,
       listItemsPreview: List<AListItemModel>.empty(),
-      filesystemPath: FilesystemPath(<String>[...parentFilesystemPath.pathSegments, uuid]),
+      filesystemPath: FilesystemPath(<String>[...parentFilesystemPath.pathSegments, '']),
       name: name,
     );
   }
@@ -52,7 +52,7 @@ class GroupModelFactory {
       return NetworkGroupModel(
         pinnedBool: groupEntity.pinnedBool,
         encryptedBool: groupEntity.encryptedBool,
-        uuid: groupEntity.uuid,
+        id: groupEntity.id,
         filesystemPath: groupEntity.filesystemPath,
         listItemsPreview: listItemsPreview,
         networkConfigModel: NetworkConfigModel.getByNetworkId(groupEntity.networkId),
@@ -61,7 +61,7 @@ class GroupModelFactory {
       return GroupModel(
         pinnedBool: groupEntity.pinnedBool,
         encryptedBool: groupEntity.encryptedBool,
-        uuid: groupEntity.uuid,
+        id: groupEntity.id,
         filesystemPath: groupEntity.filesystemPath,
         name: groupEntity.name,
         listItemsPreview: listItemsPreview,

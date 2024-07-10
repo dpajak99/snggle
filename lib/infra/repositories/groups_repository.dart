@@ -24,7 +24,7 @@ class GroupsRepository {
     return allGroups;
   }
 
-  Future<GroupEntity> getById(String id) async {
+  Future<GroupEntity> getById(int id) async {
     Map<String, dynamic> groupJson = await _databaseCollectionWrapper.getById(id);
     if (groupJson['type'] == GroupType.network.name) {
       return NetworkGroupEntity.fromJson(groupJson);
@@ -34,10 +34,10 @@ class GroupsRepository {
   }
 
   Future<void> save(GroupEntity groupEntity) async {
-    await _databaseCollectionWrapper.saveWithId(groupEntity.uuid, groupEntity.toJson());
+    await _databaseCollectionWrapper.saveWithId(groupEntity.id, groupEntity.toJson());
   }
 
-  Future<void> deleteById(String id) async {
+  Future<void> deleteById(int id) async {
     await _databaseCollectionWrapper.deleteById(id);
   }
 }

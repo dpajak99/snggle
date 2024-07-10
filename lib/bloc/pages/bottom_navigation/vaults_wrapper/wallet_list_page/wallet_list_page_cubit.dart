@@ -47,11 +47,11 @@ class WalletListPageCubit extends AListCubit<WalletModel> {
   @override
   Future<void> deleteItem(AListItemModel item) async {
     if (item is WalletModel) {
-      await _walletsService.deleteById(item.uuid);
+      await _walletsService.deleteById(item.id);
     } else if (item is GroupModel) {
       await _walletsService.deleteAllByParentPath(item.filesystemPath);
       await groupsService.deleteAllByParentPath(item.filesystemPath);
-      await groupsService.deleteById(item.uuid);
+      await groupsService.deleteById(item.id);
     }
 
     await refreshAll();
@@ -71,13 +71,13 @@ class WalletListPageCubit extends AListCubit<WalletModel> {
 
   @override
   Future<WalletModel?> fetchSingleItem(WalletModel item) async {
-    WalletModel walletModel = await _walletsService.getById(item.uuid);
+    WalletModel walletModel = await _walletsService.getById(item.id);
     return walletModel;
   }
 
   @override
   Future<GroupModel?> fetchSingleGroup(GroupModel group) async {
-    GroupModel? groupModel = await groupsService.getById(group.uuid);
+    GroupModel? groupModel = await groupsService.getById(group.id);
     return groupModel;
   }
 

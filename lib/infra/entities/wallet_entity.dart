@@ -9,7 +9,7 @@ class WalletEntity extends Equatable {
   final String address;
   final String derivationPath;
   final String network;
-  final String uuid;
+  final int id;
   final FilesystemPath filesystemPath;
   final String? name;
 
@@ -20,7 +20,7 @@ class WalletEntity extends Equatable {
     required this.address,
     required this.derivationPath,
     required this.network,
-    required this.uuid,
+    required this.id,
     required this.filesystemPath,
     this.name,
   });
@@ -33,7 +33,7 @@ class WalletEntity extends Equatable {
       address: json['address'] as String,
       derivationPath: json['derivation_path'] as String,
       network: json['network'] as String,
-      uuid: json['uuid'] as String,
+      id: json['id'] as int,
       filesystemPath: FilesystemPath.fromString(json['filesystem_path'] as String),
       name: json['name'] as String?,
     );
@@ -47,7 +47,7 @@ class WalletEntity extends Equatable {
       address: walletModel.address,
       derivationPath: walletModel.derivationPath,
       network: walletModel.network,
-      uuid: walletModel.uuid,
+      id: walletModel.id,
       filesystemPath: walletModel.filesystemPath,
       name: walletModel.name,
     );
@@ -61,12 +61,12 @@ class WalletEntity extends Equatable {
       'address': address,
       'derivation_path': derivationPath,
       'network': network,
-      'uuid': uuid,
+      'id': id,
       'filesystem_path': filesystemPath.fullPath,
       'name': name,
     };
   }
 
   @override
-  List<Object?> get props => <Object?>[encryptedBool, pinnedBool, index, address, derivationPath, network, uuid, filesystemPath, name];
+  List<Object?> get props => <Object?>[encryptedBool, pinnedBool, index, address, derivationPath, network, id, filesystemPath, name];
 }

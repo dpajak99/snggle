@@ -30,7 +30,7 @@ class NetworkListPageCubit extends AListCubit<NetworkGroupModel> {
   Future<void> deleteItem(AListItemModel item) async {
     await _walletsService.deleteAllByParentPath(item.filesystemPath);
     await groupsService.deleteAllByParentPath(item.filesystemPath);
-    await groupsService.deleteById(item.uuid);
+    await groupsService.deleteById(item.id);
 
     await refreshAll();
   }
@@ -55,7 +55,7 @@ class NetworkListPageCubit extends AListCubit<NetworkGroupModel> {
 
   @override
   Future<GroupModel?> fetchSingleGroup(GroupModel group) async {
-    GroupModel? groupModel = await groupsService.getById(group.uuid);
+    GroupModel? groupModel = await groupsService.getById(group.id);
     return groupModel;
   }
 

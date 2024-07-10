@@ -9,7 +9,7 @@ class NetworkGroupEntity extends GroupEntity {
   const NetworkGroupEntity({
     required super.pinnedBool,
     required super.encryptedBool,
-    required super.uuid,
+    required super.id,
     required super.name,
     required super.filesystemPath,
     required this.networkId,
@@ -19,7 +19,7 @@ class NetworkGroupEntity extends GroupEntity {
     return NetworkGroupEntity(
       pinnedBool: json['pinned'] as bool,
       encryptedBool: json['encrypted'] as bool,
-      uuid: json['uuid'] as String,
+      id: json['id'] as int,
       name: json['name'] as String,
       filesystemPath: FilesystemPath.fromString(json['filesystem_path'] as String),
       networkId: json['network_id'] as String,
@@ -30,7 +30,7 @@ class NetworkGroupEntity extends GroupEntity {
     return NetworkGroupEntity(
       pinnedBool: networkGroupModel.pinnedBool,
       encryptedBool: networkGroupModel.encryptedBool,
-      uuid: networkGroupModel.uuid,
+      id: networkGroupModel.id,
       name: networkGroupModel.name,
       filesystemPath: networkGroupModel.filesystemPath,
       networkId: networkGroupModel.networkConfigModel.id,
@@ -43,7 +43,7 @@ class NetworkGroupEntity extends GroupEntity {
       'type': GroupType.network.name,
       'pinned': pinnedBool,
       'encrypted': encryptedBool,
-      'uuid': uuid,
+      'id': id,
       'name': name,
       'filesystem_path': filesystemPath.fullPath,
       'network_id': networkId,
@@ -51,5 +51,5 @@ class NetworkGroupEntity extends GroupEntity {
   }
 
   @override
-  List<Object?> get props => <Object?>[pinnedBool, encryptedBool, uuid, name, filesystemPath, networkId];
+  List<Object?> get props => <Object?>[pinnedBool, encryptedBool, id, name, filesystemPath, networkId];
 }

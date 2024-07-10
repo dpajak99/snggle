@@ -16,17 +16,17 @@ class WalletsRepository {
     return allWallets;
   }
 
-  Future<WalletEntity> getById(String id) async {
+  Future<WalletEntity> getById(int id) async {
     Map<String, dynamic> walletJson = await _databaseCollectionWrapper.getById(id);
     WalletEntity walletEntity = WalletEntity.fromJson(walletJson);
     return walletEntity;
   }
 
   Future<void> save(WalletEntity walletEntity) async {
-    await _databaseCollectionWrapper.saveWithId(walletEntity.uuid, walletEntity.toJson());
+    await _databaseCollectionWrapper.saveWithId(walletEntity.id, walletEntity.toJson());
   }
 
-  Future<void> deleteById(String id) async {
+  Future<void> deleteById(int id) async {
     await _databaseCollectionWrapper.deleteById(id);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:blockchain_utils/bip/address/encoders.dart';
+import 'package:isar/isar.dart';
 import 'package:snggle/infra/entities/wallet_entity.dart';
 import 'package:snggle/shared/models/wallets/wallet_creation_request_model.dart';
 import 'package:snggle/shared/models/wallets/wallet_model.dart';
@@ -13,7 +14,7 @@ class WalletModelFactory {
       encryptedBool: false,
       pinnedBool: false,
       index: walletCreationRequestModel.index,
-      uuid: uuid,
+      id: Isar.autoIncrement,
       name: walletCreationRequestModel.name,
       network: walletCreationRequestModel.network,
       address: EthAddrEncoder().encodeKey(walletCreationRequestModel.publicKey),
@@ -27,7 +28,7 @@ class WalletModelFactory {
       pinnedBool: walletEntity.pinnedBool,
       encryptedBool: walletEntity.encryptedBool,
       index: walletEntity.index,
-      uuid: walletEntity.uuid,
+      id: walletEntity.id,
       network: walletEntity.network,
       address: walletEntity.address,
       derivationPath: walletEntity.derivationPath,

@@ -23,8 +23,8 @@ class WalletsService {
     return currentMaxIndex;
   }
 
-  Future<WalletModel> getById(String uuid) async {
-    WalletEntity walletEntity = await _walletsRepository.getById(uuid);
+  Future<WalletModel> getById(int id) async {
+    WalletEntity walletEntity = await _walletsRepository.getById(id);
     WalletModelFactory walletModelFactory = WalletModelFactory();
     return walletModelFactory.createFromEntity(walletEntity);
   }
@@ -71,13 +71,13 @@ class WalletsService {
 
     for (WalletModel walletModel in walletModelList) {
       await _secretsService.delete(walletModel.filesystemPath);
-      await _walletsRepository.deleteById(walletModel.uuid);
+      await _walletsRepository.deleteById(walletModel.id);
     }
   }
 
-  Future<void> deleteById(String uuid) async {
-    WalletModel walletModel = await getById(uuid);
+  Future<void> deleteById(int id) async {
+    WalletModel walletModel = await getById(id);
     await _secretsService.delete(walletModel.filesystemPath);
-    await _walletsRepository.deleteById(uuid);
+    await _walletsRepository.deleteById(id);
   }
 }

@@ -10,7 +10,7 @@ class NetworkGroupModel extends GroupModel {
   NetworkGroupModel({
     required super.pinnedBool,
     required super.encryptedBool,
-    required super.uuid,
+    required super.id,
     required super.filesystemPath,
     required super.listItemsPreview,
     required this.networkConfigModel,
@@ -20,7 +20,7 @@ class NetworkGroupModel extends GroupModel {
   NetworkGroupModel copyWith({
     bool? pinnedBool,
     bool? encryptedBool,
-    String? uuid,
+    int? id,
     FilesystemPath? filesystemPath,
     List<AListItemModel>? listItemsPreview,
     NetworkConfigModel? networkConfigModel,
@@ -29,7 +29,7 @@ class NetworkGroupModel extends GroupModel {
     return NetworkGroupModel(
       pinnedBool: pinnedBool ?? this.pinnedBool,
       encryptedBool: encryptedBool ?? this.encryptedBool,
-      uuid: uuid ?? this.uuid,
+      id: id ?? this.id,
       listItemsPreview: listItemsPreview ?? this.listItemsPreview,
       filesystemPath: filesystemPath ?? this.filesystemPath,
       networkConfigModel: networkConfigModel ?? this.networkConfigModel,
@@ -40,5 +40,5 @@ class NetworkGroupModel extends GroupModel {
   GroupType get groupType => GroupType.network;
 
   @override
-  List<Object?> get props => <Object?>[pinnedBool, encryptedBool, uuid, listItemsPreview, filesystemPath, networkConfigModel, name];
+  List<Object?> get props => <Object?>[pinnedBool, encryptedBool, id, listItemsPreview, filesystemPath, networkConfigModel, name];
 }

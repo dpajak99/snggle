@@ -54,27 +54,27 @@ class DatabaseCollectionWrapper<T> {
     return collectionCacheMap.values.toList();
   }
 
-  Future<T> getById(String id) async {
+  Future<T> getById(int id) async {
     await collectionCacheInitCompleter.future;
-    T? value = collectionCacheMap[id];
+    T? value = collectionCacheMap[id.toString()];
     if (value == null) {
       throw ChildKeyNotFoundException('[${id}] child key not found in [${databaseParentKey.name}] parent key');
     }
     return value;
   }
 
-  Future<void> saveWithId(String id, T value) async {
+  Future<void> saveWithId(int id, T value) async {
     await collectionCacheInitCompleter.future;
-    collectionCacheMap[id] = value;
+    collectionCacheMap[id.toString()] = value;
     await _saveCollectionCacheInDatabase();
   }
 
-  Future<void> deleteById(String id) async {
+  Future<void> deleteById(int id) async {
     await collectionCacheInitCompleter.future;
-    if (collectionCacheMap.containsKey(id) == false) {
+    if (collectionCacheMap.containsKey(id.toString()) == false) {
       throw ChildKeyNotFoundException('[${id}] child key not found in [${databaseParentKey.name}] parent key');
     }
-    collectionCacheMap.remove(id);
+    collectionCacheMap.remove(id.toString());
     await _saveCollectionCacheInDatabase();
   }
 

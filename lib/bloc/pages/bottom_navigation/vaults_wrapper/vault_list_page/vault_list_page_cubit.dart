@@ -41,12 +41,12 @@ class VaultListPageCubit extends AListCubit<VaultModel> {
   Future<void> deleteItem(AListItemModel item) async {
     if (item is VaultModel) {
       await _walletsService.deleteAllByParentPath(item.filesystemPath);
-      await _vaultsService.deleteById(item.uuid);
+      await _vaultsService.deleteById(item.id);
     } else if (item is GroupModel) {
       await _walletsService.deleteAllByParentPath(item.filesystemPath);
       await _vaultsService.deleteAllByParentPath(item.filesystemPath);
       await groupsService.deleteAllByParentPath(item.filesystemPath);
-      await groupsService.deleteById(item.uuid);
+      await groupsService.deleteById(item.id);
     }
     await refreshAll();
   }
@@ -65,13 +65,13 @@ class VaultListPageCubit extends AListCubit<VaultModel> {
 
   @override
   Future<VaultModel?> fetchSingleItem(VaultModel item) async {
-    VaultModel vaultModel = await _vaultsService.getById(item.uuid);
+    VaultModel vaultModel = await _vaultsService.getById(item.id);
     return vaultModel;
   }
 
   @override
   Future<GroupModel?> fetchSingleGroup(GroupModel group) async {
-    GroupModel? groupModel = await groupsService.getById(group.uuid);
+    GroupModel? groupModel = await groupsService.getById(group.id);
     return groupModel;
   }
 

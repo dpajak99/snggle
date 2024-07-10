@@ -10,7 +10,7 @@ class WalletModel extends AListItemModel {
   WalletModel({
     required super.encryptedBool,
     required super.pinnedBool,
-    required super.uuid,
+    required super.id,
     required super.filesystemPath,
     required super.name,
     required this.index,
@@ -27,7 +27,7 @@ class WalletModel extends AListItemModel {
     String? address,
     String? derivationPath,
     String? network,
-    String? uuid,
+    int? id,
     FilesystemPath? filesystemPath,
     String? name,
   }) {
@@ -38,7 +38,7 @@ class WalletModel extends AListItemModel {
       address: address ?? this.address,
       derivationPath: derivationPath ?? this.derivationPath,
       network: network ?? this.network,
-      uuid: uuid ?? this.uuid,
+      id: id ?? this.id,
       filesystemPath: filesystemPath ?? this.filesystemPath,
       name: name ?? this.name,
     );
@@ -50,5 +50,5 @@ class WalletModel extends AListItemModel {
   }
 
   @override
-  List<Object?> get props => <Object?>[encryptedBool, pinnedBool, index, address, derivationPath, network, uuid, name, filesystemPath];
+  List<Object?> get props => <Object?>[encryptedBool, pinnedBool, index, address, derivationPath, network, id, name, filesystemPath];
 }

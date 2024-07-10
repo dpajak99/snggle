@@ -1,57 +1,42 @@
-import 'package:equatable/equatable.dart';
+import 'package:isar/isar.dart';
 import 'package:snggle/shared/models/vaults/vault_model.dart';
-import 'package:snggle/shared/utils/filesystem_path.dart';
 
-class VaultEntity extends Equatable {
-  final bool encryptedBool;
-  final bool pinnedBool;
+part 'vault_entity.g.dart';
+
+@Collection(accessor: 'vaults')
+class VaultEntity {
+  final Id id = Isar.autoIncrement;
+
+  @Index(type: IndexType.value)
+  final bool encrypted;
+
+  @Index(type: IndexType.value)
+  final bool pinned;
+
+  @Index(type: IndexType.value)
   final int index;
-  final String uuid;
-  final FilesystemPath filesystemPath;
+
+  @Index(type: IndexType.value)
+  final String filesystemPathString;
+
+  @Index(type: IndexType.value)
   final String? name;
 
   const VaultEntity({
-    required this.encryptedBool,
-    required this.pinnedBool,
+    required this.encrypted,
+    required this.pinned,
     required this.index,
-    required this.uuid,
-    required this.filesystemPath,
+    required this.filesystemPathString,
     this.name,
   });
 
-  factory VaultEntity.fromJson(Map<String, dynamic> json) {
-    return VaultEntity(
-      encryptedBool: json['encrypted'] as bool,
-      pinnedBool: json['pinned'] as bool,
-      index: json['index'] as int,
-      uuid: json['uuid'] as String,
-      filesystemPath: FilesystemPath.fromString(json['filesystem_path'] as String),
-      name: json['name'] as String?,
-    );
-  }
-
   factory VaultEntity.fromVaultModel(VaultModel vaultModel) {
     return VaultEntity(
-      encryptedBool: vaultModel.encryptedBool,
-      pinnedBool: vaultModel.pinnedBool,
+      encrypted: vaultModel.encryptedBool,
+      pinned: vaultModel.pinnedBool,
       index: vaultModel.index,
-      uuid: vaultModel.uuid,
-      filesystemPath: vaultModel.filesystemPath,
+      filesystemPathString: vaultModel.filesystemPath.fullPath,
       name: vaultModel.name,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'encrypted': encryptedBool,
-      'pinned': pinnedBool,
-      'index': index,
-      'uuid': uuid,
-      'filesystem_path': filesystemPath.fullPath,
-      'name': name,
-    };
-  }
-
-  @override
-  List<Object?> get props => <Object?>[encryptedBool, pinnedBool, index, uuid, filesystemPath, name];
 }

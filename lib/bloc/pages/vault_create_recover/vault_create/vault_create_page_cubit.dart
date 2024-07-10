@@ -1,6 +1,7 @@
 import 'package:blockchain_utils/bip/mnemonic/mnemonic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:isar/isar.dart';
 import 'package:snggle/bloc/pages/vault_create_recover/vault_create/vault_create_page_state.dart';
 import 'package:snggle/config/locator.dart';
 import 'package:snggle/infra/services/groups_service.dart';
@@ -89,7 +90,7 @@ class VaultCreatePageCubit extends Cubit<VaultCreatePageState> {
     NetworkGroupModel networkGroupModel = NetworkGroupModel(
       pinnedBool: false,
       encryptedBool: false,
-      uuid: uuid,
+      id: Isar.autoIncrement,
       listItemsPreview: <AListItemModel>[],
       filesystemPath: FilesystemPath(<String>[...filesystemPath.pathSegments, uuid]),
       networkConfigModel: NetworkConfigModel.ethereum,

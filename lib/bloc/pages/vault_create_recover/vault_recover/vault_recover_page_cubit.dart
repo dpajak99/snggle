@@ -5,6 +5,7 @@ import 'package:blockchain_utils/bip/mnemonic/mnemonic_decoder_base.dart';
 import 'package:blockchain_utils/bip/mnemonic/mnemonic_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:isar/isar.dart';
 import 'package:snggle/bloc/pages/vault_create_recover/vault_recover/vault_recover_page_state.dart';
 import 'package:snggle/config/locator.dart';
 import 'package:snggle/infra/services/groups_service.dart';
@@ -108,7 +109,7 @@ class VaultRecoverPageCubit extends Cubit<VaultRecoverPageState> {
     NetworkGroupModel networkGroupModel = NetworkGroupModel(
       pinnedBool: false,
       encryptedBool: false,
-      uuid: uuid,
+      id: Isar.autoIncrement,
       listItemsPreview: <AListItemModel>[],
       filesystemPath: FilesystemPath(<String>[...filesystemPath.pathSegments, uuid]),
       networkConfigModel: NetworkConfigModel.ethereum,

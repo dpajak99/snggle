@@ -15,7 +15,7 @@ class GroupsService {
   final GroupsRepository _groupsRepository = globalLocator<GroupsRepository>();
   final SecretsService _secretsService = globalLocator<SecretsService>();
 
-  Future<GroupModel?> getById(String id) async {
+  Future<GroupModel?> getById(int id) async {
     try {
       GroupEntity groupEntity = await _groupsRepository.getById(id);
       return globalLocator<GroupModelFactory>().createFromEntity(groupEntity);
@@ -29,7 +29,7 @@ class GroupsService {
     try {
       List<GroupEntity> groupEntityList = await _groupsRepository.getAll();
       GroupEntity groupEntity = groupEntityList.firstWhere(
-        (GroupEntity groupEntity) => FilesystemPath.fromString('${filesystemPath.parentPath}/${groupEntity.uuid}').fullPath == filesystemPath.fullPath,
+        (GroupEntity groupEntity) => FilesystemPath.fromString('${filesystemPath.parentPath}/${groupEntity.id}').fullPath == filesystemPath.fullPath,
       );
       return globalLocator<GroupModelFactory>().createFromEntity(groupEntity);
     } catch (_) {
@@ -86,17 +86,17 @@ class GroupsService {
 
     for (GroupModel groupModel in groupModels) {
       await _secretsService.delete(groupModel.filesystemPath);
-      await _groupsRepository.deleteById(groupModel.uuid);
+      await _groupsRepository.deleteById(groupModel.id);
     }
   }
 
-  Future<void> deleteById(String uuid) async {
-    GroupModel? groupModel = await getById(uuid);
+  Future<void> deleteById(int id) async {
+    GroupModel? groupModel = await getById(id);
     if (groupModel == null) {
       throw ChildKeyNotFoundException();
     }
 
     await _secretsService.delete(groupModel.filesystemPath);
-    await _groupsRepository.deleteById(groupModel.uuid);
+    await _groupsRepository.deleteById(groupModel.id);
   }
 }

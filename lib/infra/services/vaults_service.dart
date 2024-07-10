@@ -22,8 +22,8 @@ class VaultsService {
     return currentMaxIndex;
   }
 
-  Future<VaultModel> getById(String uuid) async {
-    VaultEntity vaultEntity = await _vaultsRepository.getById(uuid);
+  Future<VaultModel> getById(int id) async {
+    VaultEntity vaultEntity = await _vaultsRepository.getById(id);
     return globalLocator<VaultModelFactory>().createFromEntity(vaultEntity);
   }
 
@@ -31,7 +31,7 @@ class VaultsService {
     List<VaultEntity> vaultEntityList = await _vaultsRepository.getAll();
 
     vaultEntityList = vaultEntityList.where((VaultEntity vaultEntity) {
-      return vaultEntity.filesystemPath.isSubPathOf(parentFilesystemPath, singleLevelBool: firstLevelBool);
+      return FilesystemPath.fromString(vaultEntity.filesystemPathString).isSubPathOf(parentFilesystemPath, singleLevelBool: firstLevelBool);
     }).toList();
 
     List<VaultModel> vaultModelList = <VaultModel>[];
@@ -73,13 +73,13 @@ class VaultsService {
 
     for (VaultModel vaultModel in vaultModelList) {
       await _secretsService.delete(vaultModel.filesystemPath);
-      await _vaultsRepository.deleteById(vaultModel.uuid);
+      await _vaultsRepository.deleteById(vaultModel.id);
     }
   }
 
-  Future<void> deleteById(String uuid) async {
-    VaultModel vaultModel = await getById(uuid);
+  Future<void> deleteById(int id) async {
+    VaultModel vaultModel = await getById(id);
     await _secretsService.delete(vaultModel.filesystemPath);
-    await _vaultsRepository.deleteById(uuid);
+    await _vaultsRepository.deleteById(id);
   }
 }

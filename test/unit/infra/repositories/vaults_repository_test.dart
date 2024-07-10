@@ -134,28 +134,28 @@ void main() {
       // Assert
       List<VaultEntity> expectedVaultEntityList = <VaultEntity>[
         VaultEntity(
-          pinnedBool: true,
-          encryptedBool: true,
+          pinned: true,
+          encrypted: true,
           index: 1,
           uuid: '92b43ace-5439-4269-8e27-e999907f4379',
           name: 'Test Vault 1',
-          filesystemPath: FilesystemPath.fromString('92b43ace-5439-4269-8e27-e999907f4379'),
+          filesystemPathString: FilesystemPath.fromString('92b43ace-5439-4269-8e27-e999907f4379'),
         ),
         VaultEntity(
-          pinnedBool: true,
-          encryptedBool: true,
+          pinned: true,
+          encrypted: true,
           index: 2,
           uuid: 'b1c2f688-85fc-43ba-9af1-52db40fa3093',
           name: 'Test Vault 2',
-          filesystemPath: FilesystemPath.fromString('b1c2f688-85fc-43ba-9af1-52db40fa3093'),
+          filesystemPathString: FilesystemPath.fromString('b1c2f688-85fc-43ba-9af1-52db40fa3093'),
         ),
         VaultEntity(
-          pinnedBool: true,
-          encryptedBool: true,
+          pinned: true,
+          encrypted: true,
           index: 3,
           uuid: '438791a4-b537-4589-af4f-f56b6449a0bb',
           name: 'Test Vault 3',
-          filesystemPath: FilesystemPath.fromString('e527efe1-a05b-49f5-bfe9-d3532f5c9db9/438791a4-b537-4589-af4f-f56b6449a0bb'),
+          filesystemPathString: FilesystemPath.fromString('e527efe1-a05b-49f5-bfe9-d3532f5c9db9/438791a4-b537-4589-af4f-f56b6449a0bb'),
         ),
       ];
 
@@ -202,12 +202,12 @@ void main() {
 
       // Assert
       VaultEntity expectedVaultEntity = VaultEntity(
-        pinnedBool: true,
-        encryptedBool: true,
+        pinned: true,
+        encrypted: true,
         index: 1,
         uuid: '92b43ace-5439-4269-8e27-e999907f4379',
         name: 'Test Vault 1',
-        filesystemPath: FilesystemPath.fromString('92b43ace-5439-4269-8e27-e999907f4379'),
+        filesystemPathString: FilesystemPath.fromString('92b43ace-5439-4269-8e27-e999907f4379'),
       );
 
       expect(actualVaultEntity, expectedVaultEntity);
@@ -231,12 +231,12 @@ void main() {
       // Arrange
       FlutterSecureStorage.setMockInitialValues(Map<String, String>.from(filledVaultsDatabase));
       VaultEntity actualUpdatedVaultEntity = VaultEntity(
-        pinnedBool: true,
-        encryptedBool: false,
+        pinned: true,
+        encrypted: false,
         index: 2,
         uuid: 'b1c2f688-85fc-43ba-9af1-52db40fa3093',
         name: 'Updated name',
-        filesystemPath: FilesystemPath.fromString('b1c2f688-85fc-43ba-9af1-52db40fa3093'),
+        filesystemPathString: FilesystemPath.fromString('b1c2f688-85fc-43ba-9af1-52db40fa3093'),
       );
 
       // Act
@@ -283,12 +283,12 @@ void main() {
       // Arrange
       FlutterSecureStorage.setMockInitialValues(Map<String, String>.from(emptyVaultsDatabase));
       VaultEntity actualNewVaultEntity = VaultEntity(
-        encryptedBool: true,
-        pinnedBool: false,
+        encrypted: true,
+        pinned: false,
         index: 1,
         uuid: 'b1c2f688-85fc-43ba-9af1-52db40fa3093',
         name: 'NEW VAULT',
-        filesystemPath: FilesystemPath.fromString('b1c2f688-85fc-43ba-9af1-52db40fa3093'),
+        filesystemPathString: FilesystemPath.fromString('b1c2f688-85fc-43ba-9af1-52db40fa3093'),
       );
 
       // Act
@@ -319,12 +319,12 @@ void main() {
       // Arrange
       FlutterSecureStorage.setMockInitialValues(Map<String, String>.from(masterKeyOnlyDatabase));
       VaultEntity actualNewVaultEntity = VaultEntity(
-        pinnedBool: true,
-        encryptedBool: false,
+        pinned: true,
+        encrypted: false,
         index: 1,
         uuid: 'b1c2f688-85fc-43ba-9af1-52db40fa3093',
         name: 'NEW VAULT',
-        filesystemPath: FilesystemPath.fromString('b1c2f688-85fc-43ba-9af1-52db40fa3093'),
+        filesystemPathString: FilesystemPath.fromString('b1c2f688-85fc-43ba-9af1-52db40fa3093'),
       );
 
       // Act
