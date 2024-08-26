@@ -53,4 +53,15 @@ class AppIcons {
   static const AssetIconData menu_unpin = AssetIconData('assets/icons/menu_unpin.svg');
   static const AssetIconData menu_unselect_all = AssetIconData('assets/icons/menu_unselect_all.svg');
   static const AssetIconData page_add_button = AssetIconData('assets/icons/page_add_button.svg');
+  static const AssetIconData network_bitcoin_large = AssetIconData('assets/icons/network_bitcoin_large.svg');
+  static const AssetIconData network_cosmos_large = AssetIconData('assets/icons/network_cosmos_large.svg');
+  static const AssetIconData network_ethereum_large = AssetIconData('assets/icons/network_ethereum_large.svg');
+  static const AssetIconData network_unknown_large = AssetIconData('assets/icons/network_unknown_large.svg');
+  static const AssetIconData network_templates_list_bitcoin = AssetIconData('assets/icons/network_templates_list_bitcoin.svg');
+  static const AssetIconData network_templates_list_cosmos = AssetIconData('assets/icons/network_templates_list_cosmos.svg');
+  static const AssetIconData network_templates_list_ethereum = AssetIconData('assets/icons/network_templates_list_ethereum.svg');
+  static const AssetIconData network_templates_list_unknown = AssetIconData('assets/icons/network_templates_list_unknown.svg');
+  static const AssetIconData network_templates_list_recent = AssetIconData('assets/icons/network_templates_list_recent.svg');
+  static const AssetIconData search = AssetIconData('assets/icons/search.svg');
+  static const AssetIconData alert_small = AssetIconData('assets/icons/alert_small.svg');
 }
