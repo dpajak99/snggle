@@ -161,6 +161,7 @@ class _WalletListPageState extends State<WalletListPage> {
       await AutoRouter.of(context).push<void>(WalletDetailsRoute(
         walletModel: listItemModel,
         walletDetailsPageCubit: walletDetailsPageCubit,
+        networkTemplateModel: widget.networkGroupModel.networkTemplateModel,
       ));
 
       await walletDetailsPageCubit.close();

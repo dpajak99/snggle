@@ -66,5 +66,10 @@ class AppIcons {
   static const AssetIconData page_no_data = AssetIconData('assets/icons/page_no_data.svg');
   static const AssetIconData search = AssetIconData('assets/icons/search.svg');
   static const AssetIconData settings_warning = AssetIconData('assets/icons/settings_warning.svg');
+  static const AssetIconData connect_wallet_hardware = AssetIconData('assets/icons/connect_wallet_hardware.svg');
+  static const AssetIconData connect_wallet_qr = AssetIconData('assets/icons/connect_wallet_qr.svg');
+  static const AssetIconData wallet_metamask = AssetIconData('assets/icons/wallet_metamask.svg');
+  static const AssetIconData wallet_ledger = AssetIconData('assets/icons/wallet_ledger.svg');
+  static const AssetIconData wallet_trezor = AssetIconData('assets/icons/wallet_trezor.svg');
 
 }

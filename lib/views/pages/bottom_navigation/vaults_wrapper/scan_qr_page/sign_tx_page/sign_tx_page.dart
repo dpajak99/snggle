@@ -64,6 +64,7 @@ class _SignTxPageState extends State<SignTxPage> {
         } else if (signTxPageState is SignTxPageSignedTxState) {
           child = QRResultScaffold.fromUniformResource(
             title: 'SIGNATURE',
+            subtitle: 'Signature',
             closeButtonVisible: true,
             ur: UR.fromCborTaggedObject(signTxPageState.cborEthSignature),
             tooltip: BottomTooltip(
@@ -75,7 +76,7 @@ class _SignTxPageState extends State<SignTxPage> {
                 )
               ],
             ),
-            child: Column(
+            body: Column(
               children: <Widget>[
                 LabelWrapperVertical(
                   label: 'Signed with',
