@@ -51,6 +51,11 @@ const WalletEntitySchema = CollectionSchema(
       id: 6,
       name: r'pinnedBool',
       type: IsarType.bool,
+    ),
+    r'xpub': PropertySchema(
+      id: 7,
+      name: r'xpub',
+      type: IsarType.string,
     )
   },
   estimateSize: _walletEntityEstimateSize,
@@ -96,6 +101,7 @@ int _walletEntityEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  bytesCount += 3 + object.xpub.length * 3;
   return bytesCount;
 }
 
@@ -112,6 +118,7 @@ void _walletEntitySerialize(
   writer.writeLong(offsets[4], object.index);
   writer.writeString(offsets[5], object.name);
   writer.writeBool(offsets[6], object.pinnedBool);
+  writer.writeString(offsets[7], object.xpub);
 }
 
 WalletEntity _walletEntityDeserialize(
@@ -129,6 +136,7 @@ WalletEntity _walletEntityDeserialize(
     index: reader.readLong(offsets[4]),
     name: reader.readStringOrNull(offsets[5]),
     pinnedBool: reader.readBool(offsets[6]),
+    xpub: reader.readString(offsets[7]),
   );
   return object;
 }
@@ -154,6 +162,8 @@ P _walletEntityDeserializeProp<P>(
       return (reader.readStringOrNull(offset)) as P;
     case 6:
       return (reader.readBool(offset)) as P;
+    case 7:
+      return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -981,6 +991,140 @@ extension WalletEntityQueryFilter
       ));
     });
   }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterFilterCondition> xpubEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'xpub',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterFilterCondition>
+      xpubGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'xpub',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterFilterCondition> xpubLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'xpub',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterFilterCondition> xpubBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'xpub',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterFilterCondition>
+      xpubStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'xpub',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterFilterCondition> xpubEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'xpub',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterFilterCondition> xpubContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'xpub',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterFilterCondition> xpubMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'xpub',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterFilterCondition>
+      xpubIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'xpub',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterFilterCondition>
+      xpubIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'xpub',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension WalletEntityQueryObject
@@ -1078,6 +1222,18 @@ extension WalletEntityQuerySortBy
       sortByPinnedBoolDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'pinnedBool', Sort.desc);
+    });
+  }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterSortBy> sortByXpub() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'xpub', Sort.asc);
+    });
+  }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterSortBy> sortByXpubDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'xpub', Sort.desc);
     });
   }
 }
@@ -1185,6 +1341,18 @@ extension WalletEntityQuerySortThenBy
       return query.addSortBy(r'pinnedBool', Sort.desc);
     });
   }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterSortBy> thenByXpub() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'xpub', Sort.asc);
+    });
+  }
+
+  QueryBuilder<WalletEntity, WalletEntity, QAfterSortBy> thenByXpubDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'xpub', Sort.desc);
+    });
+  }
 }
 
 extension WalletEntityQueryWhereDistinct
@@ -1235,6 +1403,13 @@ extension WalletEntityQueryWhereDistinct
   QueryBuilder<WalletEntity, WalletEntity, QDistinct> distinctByPinnedBool() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'pinnedBool');
+    });
+  }
+
+  QueryBuilder<WalletEntity, WalletEntity, QDistinct> distinctByXpub(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'xpub', caseSensitive: caseSensitive);
     });
   }
 }
@@ -1288,6 +1463,12 @@ extension WalletEntityQueryProperty
   QueryBuilder<WalletEntity, bool, QQueryOperations> pinnedBoolProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'pinnedBool');
+    });
+  }
+
+  QueryBuilder<WalletEntity, String, QQueryOperations> xpubProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'xpub');
     });
   }
 }

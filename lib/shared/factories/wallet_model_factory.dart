@@ -23,6 +23,7 @@ class WalletModelFactory {
       address: walletCreationRequestModel.hdWallet.address,
       filesystemPath: const FilesystemPath.empty(),
       derivationPath: walletCreationRequestModel.derivationPathString,
+      xpub: walletCreationRequestModel.hdWallet.publicKey.getExtendedPublicKey(),
     );
 
     int walletId = await _walletsService.save(walletModel);
@@ -50,6 +51,7 @@ class WalletModelFactory {
       address: walletEntity.address,
       derivationPath: walletEntity.derivationPath,
       filesystemPath: walletEntity.filesystemPath,
+      xpub: walletEntity.xpub,
       name: walletEntity.name,
     );
   }

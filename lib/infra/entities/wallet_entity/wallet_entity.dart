@@ -15,6 +15,7 @@ class WalletEntity extends Equatable {
   final String derivationPath;
   @Index()
   final String filesystemPathString;
+  final String xpub;
   final String? name;
 
   const WalletEntity({
@@ -25,6 +26,7 @@ class WalletEntity extends Equatable {
     required this.address,
     required this.derivationPath,
     required this.filesystemPathString,
+    required this.xpub,
     this.name,
   });
 
@@ -38,6 +40,7 @@ class WalletEntity extends Equatable {
       derivationPath: walletModel.derivationPath,
       filesystemPathString: walletModel.filesystemPath.fullPath,
       name: walletModel.name,
+      xpub: walletModel.xpub,
     );
   }
 
@@ -50,6 +53,7 @@ class WalletEntity extends Equatable {
     String? derivationPath,
     String? filesystemPathString,
     String? name,
+    String? xpub,
   }) {
     return WalletEntity(
       id: id ?? this.id,
@@ -60,6 +64,7 @@ class WalletEntity extends Equatable {
       derivationPath: derivationPath ?? this.derivationPath,
       filesystemPathString: filesystemPathString ?? this.filesystemPathString,
       name: name ?? this.name,
+      xpub: xpub ?? this.xpub,
     );
   }
 
@@ -67,5 +72,5 @@ class WalletEntity extends Equatable {
   FilesystemPath get filesystemPath => FilesystemPath.fromString(filesystemPathString);
 
   @override
-  List<Object?> get props => <Object?>[id, encryptedBool, pinnedBool, index, address, derivationPath, filesystemPathString, name];
+  List<Object?> get props => <Object?>[id, encryptedBool, pinnedBool, index, address, derivationPath, filesystemPathString, xpub, name];
 }
